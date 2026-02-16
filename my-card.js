@@ -1,30 +1,46 @@
 import { LitElement, html, css } from 'https://unpkg.com/lit@3/index.js?module';
 
 class MyCard extends LitElement {
-  static properties = {
-    title: { type: String },
-    description: { type: String },
-    image: { type: String },
-    link: { type: String },
-    altBg: { type: Boolean, attribute: 'alt-bg' }
-  };
+  static get properties() {
+    return {
+      title: { type: String },
+      image: { type: String },
+      link: { type: String },
+      fancy: { type: Boolean, reflect: true },
+      label: { type: String }
+    };
+  }
 
   constructor() {
     super();
     this.title = 'Robot Card';
-    this.description = 'ROBOT card';
     this.image = '';
     this.link = '';
-    this.altBg = false;
+    this.fancy = false;
+    this.label = 'Description';
   }
 
   static styles = css`
+    :host {
+      display: inline-block;
+      --my-card-fancy-bg: pink;
+      --my-card-fancy-border: fuchsia;
+      --my-card-fancy-shadow: red;
+    }
+
+    :host([fancy]) .card {
+      background-color: var(--my-card-fancy-bg);
+      border: 2px solid var(--my-card-fancy-border);
+      box-shadow: 10px 5px 5px var(--my-card-fancy-shadow);
+    }
+
     .card {
       max-width: 400px;
       border: 2px solid #000;
       padding: 16px;
       margin: 16px;
       font-family: Arial, sans-serif;
+      transition: all 0.3s ease;
     }
 
     .card img {
@@ -42,9 +58,23 @@ class MyCard extends LitElement {
       color: black;
     }
 
-    .alt-bg {
-      background-color: #00487C;
-      color: white;
+    details summary {
+      text-align: left;
+      font-size: 20px;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+
+    details[open] summary {
+      font-weight: bold;
+    }
+    
+    details div {
+      border: 2px solid black;
+      text-align: left;
+      padding: 8px;
+      height: 70px;
+      overflow: auto;
     }
 
     @media (max-width: 500px) {
@@ -54,12 +84,27 @@ class MyCard extends LitElement {
     }
   `;
 
+  openChanged(e) {
+    if (e.target.getAttribute('open') !== null) {
+      this.fancy = true;
+    } else {
+      this.fancy = false;
+    }
+  }
+
   render() {
     return html`
-      <section class="card ${this.altBg ? 'alt-bg' : ''}">
-        <img src="${this.image}" alt="robot image" />
+      <section class="card">
+        <img src="${this.image}" alt="${this.title}" />
         <h2>${this.title}</h2>
-        <p>${this.description}</p>
+        
+        <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+          <summary>${this.label}</summary>
+          <div>
+            <slot></slot>
+          </div>
+        </details>
+
         <a href="${this.link}" class="details-button">Details</a>
       </section>
     `;

@@ -12,6 +12,12 @@
         flex-wrap: wrap;
         justify-content: center;
       }
+      
+      my-card[fancy] {
+        --my-card-fancy-bg: #e6f7ff;
+        --my-card-fancy-border: #1890ff;
+        --my-card-fancy-shadow: rgba(0, 0, 0, 0.2);
+      }
     </style>
   </head>
 
@@ -20,39 +26,26 @@
 
       <my-card
         title="Robot One"
-        description="First robot card"
         image="https://m.media-amazon.com/images/M/MV5BMTEzODY5ODYtMTIxMi00Yjg5LTk2ZjMtMzI1YTAzOGQzYWZkXkEyXkFqcGc@._V1_QL75_UX291_.jpg"
-        link="https://hax.psu.edu">
+        link="https://hax.psu.edu"
+        fancy
+        label="Learn More">
+        <p>The  <strong>original</strong> robot</p>
       </my-card>
 
       <my-card
         title="Bender"
-        description="Bite my shiny metal..."
-        image="https://static.wikia.nocookie.net/futurama/images/4/4b/Bender.png"
-        link="https://en.wikipedia.org/wiki/Bender_(Futurama)"
-        alt-bg>
+        image="https://oyster.ignimgs.com/mediawiki/apis.ign.com/futurama/5/51/Bender.jpg"
+        link="https://en.wikipedia.org/wiki/Bender_(Futurama)">
+        <p>Bender bender bender</p>
       </my-card>
 
       <my-card
         title="Wall-E"
-        description="Cleaning up Earth"
-        image="https://upload.wikimedia.org/wikipedia/en/5/5f/Wall-E_poster.jpg"
-        link="https://pixar.com">
-      </my-card>
-
-      <my-card
-        title="AI Unit 04"
-        description="Experimental robot"
-        image="https://i.ytimg.com/vi/XZ_meCZPVR4/maxresdefault.jpg"
-        link="#"
-        alt-bg>
-      </my-card>
-
-      <my-card
-        title="Final Bot"
-        description="Last card demo"
-        image="https://i.imgur.com/6X4YbZk.jpeg"
-        link="#">
+        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUoKd6d6NYN0-3psNMW-661MEYzUE36nBt_g&s"
+        link="https://pixar.com"
+        fancy>
+        <p>Wall-E go home or something</p>
       </my-card>
 
     </div>
